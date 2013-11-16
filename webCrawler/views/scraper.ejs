@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <title>WebCrawler</title>
+        <link rel="stylesheet" type="text/css" href="public/css/style.css"/>
+    </head>
+    <body>
+        <h1>Web Crawler</h1>
+        
+        <form action="/scraper/url/" method="post">
+            <p>
+                <label for="scraper">Quel site ?</label>
+                <input type="text" name="scraper" id="scraper" autofocus />
+                <input type="submit" />
+            </p>
+        </form>
+
+        </br><input id="showDB" type="button" value="Afficher les urls récupérés" name="showDB" onclick="location.href='/scraper/showDatabse'">
+        <input id="removeDB" type="button" value="Supprimer les urls de la BD" name="removeDB" onclick="location.href='/scraper/removeDatabase'">
+    </body>
+</html>

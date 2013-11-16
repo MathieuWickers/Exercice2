@@ -1,0 +1,17 @@
+{
+  "name": "webSpider",
+  "version": "0.0.0",
+  "description": "WebCrawler JavaScript",
+  "main": "scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wickers Mathieu",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "async": "~0.2.9",
+    "lodash": "~2.2.1",
+    "winston": "~0.7.2",
+    "request": "~2.27.0"
+  }
+}
