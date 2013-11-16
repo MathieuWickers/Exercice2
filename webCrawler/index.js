@@ -30,13 +30,21 @@ app.use(express.bodyParser())
 
 /* Show data of the database */
 .get('/scraper/showDatabse', function(req, res) {
-  DBManager.showDatabase();
+  DBManager.showData();
   res.redirect('/scraper');
 })
 
 /* Remove data of the database */
 .get('/scraper/removeDatabase', function(req, res) {
-  DBManager.deleteDatabase();
+  DBManager.deleteData();
+  res.redirect('/scraper');
+})
+
+/* Remove data of the database */
+.post('/scraper/findData', function(req, res) {
+  if (req.body.keyWord !== '') {
+    DBManager.findData(req.body.keyWord);
+  }
   res.redirect('/scraper');
 })
  
