@@ -1,15 +1,15 @@
 #Web Crawler
 
-## Wickers Mathieu LP Présentielle
-
-
-### Requirements
+## Requirements :
 To run this application, you need to :
 + install and run MongoDB on your computer
 + install Nodejs
 
-### Launch
+## Launch :
 Go into the webCrawler directory and use
-	node index.js
+
+    node index.js
 
 All informations are display on the console
+
+### Author : Wickers Mathieu LP Présentielle
