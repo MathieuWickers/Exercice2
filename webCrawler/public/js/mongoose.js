@@ -24,7 +24,7 @@ var DBUrlModel = mongoose.model('commentaires', DBUrlSchema);
 
 var DBManager = {};
 
-//delete entries on the database
+//delete all data on the database
 DBManager.deleteEntries = function (err, comms) {
   if (err) {
     throw err;
@@ -46,7 +46,7 @@ DBManager.deleteDatabase = function (err, comms) {
   DBUrlModel.find(null, DBManager.deleteEntries);
 };
 
-//show the database
+//show all data on the database
 DBManager.showEntries = function (err, comms) {
   if (err) {
     throw err;
