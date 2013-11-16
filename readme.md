@@ -10,6 +10,7 @@ Go into the webCrawler directory and use
 
     node index.js
 
+Then go to http://localhost:8080/scraper
 All informations are display on the console
 
 ### Author : Wickers Mathieu LP Présentielle
