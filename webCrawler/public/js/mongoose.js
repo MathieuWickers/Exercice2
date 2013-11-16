@@ -25,46 +25,66 @@ var DBUrlModel = mongoose.model('commentaires', DBUrlSchema);
 var DBManager = {};
 
 //delete all data on the database
-DBManager.deleteEntries = function (err, comms) {
-  if (err) {
-    throw err;
-  }
-  console.log('------------------------------');
-  console.log('Supression en cours ...');
-  console.log('------------------------------');
-  var comm;
-  for (var i = 0, l = comms.length; i < l; i++) {
-    comm = comms[i];
-    comm.remove();
-  }
-  console.log('------------------------------');
-  console.log('Fin de la supression');
-  console.log('------------------------------');
-};
-
-DBManager.deleteDatabase = function (err, comms) {
-  DBUrlModel.find(null, DBManager.deleteEntries);
+DBManager.deleteData = function () {
+  DBUrlModel.find(null, function (err,comms) {
+    if (err) {
+      throw err;
+    }
+    console.log('------------------------------');
+    console.log('Supression en cours ...');
+    console.log('------------------------------');
+    var comm;
+    for (var i = 0, l = comms.length; i < l; i++) {
+      comm = comms[i];
+      comm.remove();
+    }
+    console.log('------------------------------');
+    console.log('Fin de la supression');
+    console.log('------------------------------');
+  });
 };
 
 //show all data on the database
-DBManager.showEntries = function (err, comms) {
-  if (err) {
-    throw err;
-  }
-  var comm;
-  for (var i = 0, l = comms.length; i < l; i++) {
-    comm = comms[i];
-    console.log('------------------------------');
-    console.log('url : ' + comm.url);
-    console.log('Date : ' + comm.date);
-    console.log('ID : ' + comm._id);
-    console.log('------------------------------');
-  }
+DBManager.showData = function () {
+  DBUrlModel.find(null, function (err, comms) {
+    if (err) {
+      throw err;
+    }
+    var comm;
+    for (var i = 0, l = comms.length; i < l; i++) {
+      comm = comms[i];
+      console.log('------------------------------');
+      console.log('url : ' + comm.url);
+      console.log('Date : ' + comm.date);
+      console.log('ID : ' + comm._id);
+      console.log('------------------------------');
+    }
+  });
 };
 
-DBManager.showDatabase = function (err, comms) {
-  DBUrlModel.find(null, DBManager.showEntries);
+//find each data which contain the keyword 
+DBManager.findData = function (word) {
+  var query = DBUrlModel.find(null);
+  var search = word;
+  query.where('url', new RegExp(search));
+  console.log(word);
+  query.exec(function (err, comms) {
+    if (err) {
+      throw err;
+    }
+    console.log(word);
+    var comm;
+    for (var i = 0, l = comms.length; i < l; i++) {
+      comm = comms[i];
+      console.log('------------------------------');
+      console.log('url : ' + comm.url);
+      console.log('Date : ' + comm.date);
+      console.log('ID : ' + comm._id);
+      console.log('------------------------------');
+    }
+  });
 };
+
 
 exports.DBManager = DBManager;
 exports.DBUrlModel = DBUrlModel;
