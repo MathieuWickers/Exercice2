@@ -1,4 +1,5 @@
 #Web Crawler
+Author : Wickers Mathieu LP Présentielle
 
 ## Requirements :
 To run this application, you need to :
@@ -8,10 +9,14 @@ To run this application, you need to :
 ## Launch :
 Go into the webCrawler directory and use
 
-    node index.js
+
+         ./mongo/bin/mongodb  
+         node index.js
 
 Then go to http://localhost:8080/scraper
 
-All informations are display on the console
 
-### Author : Wickers Mathieu LP Présentielle
+##Issues
++ Some times, the scraper block for some minutes on following line and I haven't manage to use a timer to avoid it
+
+    (html_str.match(EXTRACT_URL_REG) || []).forEach(function(url)
