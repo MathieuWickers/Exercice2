@@ -21,6 +21,9 @@ var queue           = [];
 
 var mongoose        = require('mongoose');
 var DBUrlModel      = require('./mongoose').DBUrlModel;
+var i = -1;
+var timer;
+
 
 // This object will be use for the export
 var scraper = {};
@@ -33,6 +36,7 @@ var scraper = {};
  */
 
 scraper.get_page = function(page_url) {
+  i++;
   em.emit('page:scraping', page_url);
 
   // See: https://github.com/mikeal/request
@@ -50,7 +54,7 @@ scraper.get_page = function(page_url) {
       em.emit('page:error', page_url, error);
       return;
     }
-
+   
     //Show some header informations 
     //console.log(http_client_response.headers) show all the informations
     if (typeof http_client_response.headers['content-length'] !== 'undefined') {
@@ -77,7 +81,6 @@ scraper.extract_links = function(page_url, html_str) {
   // So here I do "(match() || []) in order to always work on an array (and yes, that's another pattern).
   (html_str.match(EXTRACT_URL_REG) || []).forEach(function(url) {
     // see: http://nodejs.org/api/all.html#all_emitter_emit_event_arg1_arg2
-
     // if the array don't contain the url (indexOf return -1)
     if (queue.indexOf(url) === -1) {
       em.emit('url', page_url, html_str, url);
@@ -115,6 +118,7 @@ em.on('page', function (page_url, html_str) {
 
 em.on('page:error', function (page_url, error) {
   console.error('Oops an error occured on', page_url, ' : ', error);
+  em.emit('exit');
 });
 
 em.on('page', scraper.extract_links);
@@ -126,7 +130,12 @@ em.on('url', function (page_url, html_str, url) {
 em.on('url', scraper.handle_new_url);
 
 em.on('exit', function () {
-  console.info('No more link');
+  if (i < queue.length) {
+    scraper.get_page(queue[i]);
+  }
+  else {
+    console.log('No more links');
+  }
 });
 
 console.info('Web UI Listening on port ' + PORT);
