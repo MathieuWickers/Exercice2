@@ -22,7 +22,6 @@ var queue           = [];
 var mongoose        = require('mongoose');
 var DBUrlModel      = require('./mongoose').DBUrlModel;
 var i = -1;
-var timer;
 
 
 // This object will be use for the export
