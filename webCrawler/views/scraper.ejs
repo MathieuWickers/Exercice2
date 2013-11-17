@@ -26,6 +26,14 @@
             </p>
         </form>
         <input id="showDB" type="button" value="Afficher toutes les urls indéxées" name="showDB" onclick="location.href='/scraper/showDatabse'">
+
+        <form action="/scraper/deleteData/" method="post">
+            <p>
+                <label for="word">Supprimer dans la BD :</label>
+                <input type="text" name="word" id="word" placeholder="mot clé"/>
+                <input type="submit" />
+            </p>
+        </form>
         <input id="removeDB" type="button" value="Supprimer toutes les urls" name="removeDB" onclick="location.href='/scraper/removeDatabase'">
 
        

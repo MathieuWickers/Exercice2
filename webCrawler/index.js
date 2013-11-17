@@ -28,22 +28,30 @@ app.use(express.bodyParser())
   res.redirect('/scraper');
 })
 
-/* Show data of the database */
+/* Show all data of the database */
 .get('/scraper/showDatabse', function(req, res) {
-  DBManager.showData();
+  DBManager.showAllData();
   res.redirect('/scraper');
 })
 
-/* Remove data of the database */
+/* Remove all data of the database */
 .get('/scraper/removeDatabase', function(req, res) {
-  DBManager.deleteData();
+  DBManager.deleteAllData();
   res.redirect('/scraper');
 })
 
-/* Remove data of the database */
+/* Show some data */
 .post('/scraper/findData', function(req, res) {
   if (req.body.keyWord !== '') {
     DBManager.findData(req.body.keyWord);
+  }
+  res.redirect('/scraper');
+})
+
+/* Remove some data of the database */
+.post('/scraper/deleteData', function(req, res) {
+  if (req.body.word !== '') {
+    DBManager.deleteData(req.body.word);
   }
   res.redirect('/scraper');
 })
